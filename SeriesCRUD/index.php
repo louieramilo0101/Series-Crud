@@ -7,9 +7,11 @@ if(isset($_POST['submit'])){
     $mobile =   $_POST['mobile'];
     $datas=     $_POST['data']; // Get checkbox values
     $allData = implode(", ", $datas); // Combine checkbox values into a string
+    $gender =$_POST['gender'];
+    $place=$_POST['place'];
 
-    $sql = "INSERT INTO `seriescrud`(fname, lname,email, mobile, multipleData) 
-    VALUES ('$fname','$lname','$email','$mobile', '$allData')";
+    $sql = "INSERT INTO `seriescrud`(fname, lname,email, mobile, multipleData,gender, place) 
+    VALUES ('$fname','$lname','$email','$mobile', '$allData', '$gender', '$place')";
 
     $result = mysqli_query($con,$sql);
 
@@ -70,8 +72,27 @@ if(isset($_POST['submit'])){
             <input type="checkbox" name="data[]" value="CSS">CSS
 
         </div>
-        <button class="btn btn-dark btn-lg my-3" name="submit">Sumbit</button>
 
+        <div class="my-3">
+            Gender:
+            <input type="radio" name ="gender" value="male">Male
+            <input type="radio" name ="gender" value="female">Female    
+            <input type="radio" name ="gender" value="kids">Kids
+        </div>
+
+        <div>
+
+                <select name="place">
+                    <option value="banglore">Banglore</option>            
+                    <option value="kolkata">Kolkata</option>
+                    <option value="Mysore">Mysore</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+
+            </div>
+            <div class="my-5">                
+                <button class="btn btn-dark btn-lg my-5" name="submit">Sumbit</button>
+            </div>
         </form>
 
     </div>

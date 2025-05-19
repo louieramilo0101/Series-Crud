@@ -9,7 +9,9 @@ $row = mysqli_fetch_assoc($result);
     $lname = $row['lname'];
     $email = $row['email'];
     $mobile = $row['mobile'];   
-    $datas= $row['multipleData']; // Get checkbox values
+    $datas= $row['multipleData'];
+    $gender =$row['gender'];
+    $place = $row['place']; 
    
     if(isset($_POST['update'])){
     $fname = $_POST['fname'];
@@ -17,14 +19,17 @@ $row = mysqli_fetch_assoc($result);
     $email = $_POST['email'];
     $mobile = $_POST['mobile']; 
     $datas= $_POST['data']; // Get checkbox values
-    $allData = implode(", ", $datas); 
+    $gender = $_POST['gender'];
+    $allData = implode(", ", $datas);
+    $place = $_POST['place'];
    
 
     $sql = "UPDATE `seriescrud` SET fname = '$fname', lname = '$lname', email = '$email',
-    mobile = '$mobile', multipleData = '$allData' WHERE id = '$id'";
+    mobile = '$mobile', multipleData = '$allData', gender = '$gender', place = '$place' WHERE id = '$id'";
     $result = mysqli_query($con, $sql);
     if($result){
-       echo " Updated Sucesfully";
+        header("location:read.php");
+       //echo " Updated Sucesfully";
     }else{
         die(mysqli_die($con));
     }
@@ -82,7 +87,24 @@ $row = mysqli_fetch_assoc($result);
                     <input type="checkbox" name="data[]" value="CSS">CSS     
 
                 </div>
-                <button type="submit" class="btn btn-dark brn-lg my-3" name="update">Update</button>
+
+                   <div class="my-3">
+                        Gender:
+                        <input type="radio" name ="gender" value="male">Male
+                        <input type="radio" name ="gender" value="female">Female    
+                        <input type="radio" name ="gender" value="kids">Kids
+                    </div>
+                    <div>
+                        <select name="place">
+                            <option value="banglore">Banglore</option>            
+                            <option value="kolkata">Kolkata</opt>
+                            <option value="Mysore">Mysore</option>
+                            <option value="Mumbai">Mumbai</option>
+                        </select>
+                    </div>
+                    <div class="my-5"> 
+                        <button type="submit" class="btn btn-dark brn-lg my-3" name="update">Update</button>
+                    </div>
             </form>
 
 

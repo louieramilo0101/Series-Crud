@@ -18,6 +18,7 @@ include 'connect.php';
   <body>
    <div class="container my-5">
    <table class="table">
+    <!-- Table header -->  
   <thead>
     <tr>
       <th scope="col">Serial Number</th>
@@ -26,24 +27,30 @@ include 'connect.php';
       <th scope="col">Email</th>
       <th scope="col">Mobile</th>
       <th scope="col">Subjects</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Place</th>
       <th scope="col">Operations</th>
+      
     </tr>
 
   </thead>
   <tbody>
 <?php
-//Select Query
+//Select Query to select all the data from the database
 $sql = "SELECT * FROM `seriescrud`";
 $result = mysqli_query($con,$sql);
 while( $row = mysqli_fetch_array($result) ){
 
+  
     $id = $row['id'];
     $fname = $row['fname'];
     $lname = $row['lname'];
     $email = $row['email'];
     $mobile = $row['mobile'];
-    $datas=    $row['multipleData']; // Get checkbox values
-
+    $datas  = $row['multipleData'];
+    $gender = $row['gender'];
+    $place = $row['place']; 
+  //output the data inside the table
     echo ' 
     <tr>
       <th scope="row">'.$id.'</th>
@@ -52,6 +59,9 @@ while( $row = mysqli_fetch_array($result) ){
       <td>'.$email.'</td>
       <td>'.$mobile.'</td>
       <td>'.$datas.'</td>
+      <td>'.$gender.'</td>
+      <td>'.$place.'</td>
+
       <td>
     <a href="update.php?updateid='.$id.' " class= "btn btn-dark"> Update</a>
     <a href="delete.php?deleteid='.$id.' " class= "btn btn-danger"> Delete</a>
